@@ -9,9 +9,63 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+"practice (creat an object with values)"
 
 ```{r}
 a <- 2
 3 -> b
+```
+
+```{r}
+65 + b
+```
+
+```{r}
+goose = 13
+```
+
+```{r}
+b
+```
+
+```{r}
+`goose`
+```
+# When to use `
+
+```{r}
+`108我的未來體重` = 54
+```
+
+```{r}
+`108我的未來體重`
+```
+# numeric class
+
+```{r}
+class(a) 
+```
+
+```{r}
+a<-5
+a2<-5L
+```
+
+```{r}
+class(a2)
+```
+# vector
+
+```{r}
+aVector<-c(5,6,7)
+a2Vector<-c(5L,6L,7L)
+```
+
+```{r}
+class(aVector)
+```
+
+```{r}
+class(a2Vector)
 ```
 
