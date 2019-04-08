@@ -1,0 +1,92 @@
+---
+title: "2019-04-03-punpun214"
+author: "Pun"
+date: "2019年4月8日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+x3 <- c("小明","小花")
+y3 <- c("小明","小華")
+```
+
+```{r}
+x3 == y3
+x3 != y3
+```
+
+```{r}
+x3 == y3
+!(x3 == y3)
+```
+
+```{r}
+library(readr)
+exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
+currency <- exData2$幣別
+```
+
+```{r}
+head(currency) # head 會顯使物件前六個元素值
+```
+
+資料一進來並沒有被當成factor class
+```{r}
+class(currency)
+```
+
+更正為factor class 左邊是新物件右邊是舊物件
+```{r}
+currency <- as.factor(currency)
+class(currency)
+```
+
+```{r}
+levels(currency)
+```
+null因為他沒有把currency當作類別資料
+
+# 算法一
+
+```{r}
+length(levels(currency))
+```
+# 算法二
+```{r}
+step1_extractlevelsVector <- levels(currency)
+step1_extractlevelsVector
+```
+
+```{r}
+step2_countVectorLength <- length(step1_extractlevelsVector)
+```
+
+```{r}
+step2_countVectorLength
+```
+
+多少筆日圓資料
+```{r}
+head(currency)
+levels(currency)
+```
+
+```{r}
+currency2 <- c("日元","美元","日元")
+currency2
+``` 
+
+```{r}
+currency2 == "日元"
+sum(currency2 == "日元")
+```
+
+```{r}
+head(currency)
+sum(currency == "日圓JPY/USD")
+```
+
