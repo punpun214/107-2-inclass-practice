@@ -90,3 +90,18 @@ head(currency)
 sum(currency == "日圓JPY/USD")
 ```
 
+# 5.4 Logical Operators
+
+```{r}
+x5 <- c("台北市","新北市","高雄市")
+greatTaipei <- c("台北市","新北市")
+
+x5 %in% greatTaipei
+!(x5 %in% greatTaipei)
+```
+
+
+
+
+
+
