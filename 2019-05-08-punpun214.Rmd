@@ -1,0 +1,181 @@
+---
+title: '2019-05-08'
+author: "Pun"
+date: "2019年5月8日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+x <- as.character(round(runif(10)*100),10)
+x
+```
+
+```{r}
+logicBig <- (as.integer(x) > 50)
+
+logicBig
+```
+
+```{r}
+library(lubridate); library(stringr); library(dplyr); library(readr); library(purrr)
+
+```
+
+```{r}
+a <- list(
+  學號=c("a23","a22","a41"),
+  成績=c(88,76,82)
+)
+map(a,~.[[2]]) ### 取出每個元素第二位
+map(a,~.[c(1,3)]) ### 取出每個元素第一及第三位
+map(a,~.[c(T,F,T)]) ### 取出每個元素第一及第三位
+```
+
+```{r}
+randomGrades <- sample(40:80,15,replace = T)
+randomCredits <- sample(0:3,15,replace=T)
+data3 <- list(
+  成績=randomGrades,
+  學分數=randomCredits
+)
+```
+
+```{r}
+passLogic <- data3$成績>=60
+map(data3,~.[passLogic]) -> passData
+passData
+```
+
+```{r}
+logiPass <- (data3$成績 >= 60)
+logiPass
+a <- data3$成績[logiPass]
+b <- data3$學分數[logiPass]
+PassData <- list(成績 = a, 學分數= b)
+
+PassData
+```
+
+
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,15,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+### twDates
+```
+
+```{r}
+str_replace(twDates,"民國"," ") -> twDates2
+str_replace(twDates2,"月"," ") -> twDates2  
+twDates2
+```
+
+```{r}
+str_replace_all(twDates,"(民國)|(月)","") -> twDate2ans
+twDate2ans
+```
+
+```{r}
+str_split(twDates2,"年") -> dateList
+map(dateList,~.[[1]]) -> yy
+as.integer(yy)+1911 -> westYears
+
+westYears
+```
+
+```{r}
+twDates
+str_sub(twDates,3,5) -> yearCharacter
+yearCharacter
+```
+
+```{r}
+as.integer(yearCharacter)+1911 -> westYears2
+westYears2
+```
+
+
+
+```{r}
+twDates2
+str_split(twDates2,"年")
+```
+
+#這題真的難 錯的應該 別難過
+```{r}
+twDates2
+str_split(twDates2,"年") -> datesSplitList
+datesSplitList
+
+map(datesSplitList,~.[[2]]) -> monthList
+monthList
+
+unlist(monthList) -> monthVector
+monthVector
+
+str_c(as.character(westYears),monthVector,"01",sep="-") -> westDates
+westDates
+
+ymd(westDates) -> westDates
+westDates
+```
+
+```{r}
+load("~/Desktop/GitHub/course-107-2-programming-for-data-science/exam/sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+
+```
+
+```{r}
+load("sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
+
+```{r}
+(sampledTranscriptData$科目名稱 == "科目204") -> logicChosenSubject
+length(logicChosenSubject)
+sum(logicChosenSubject)
+(sampledTranscriptData$科目名稱 == "科目204" & 
+    sampledTranscriptData$學期成績 < 60) -> logicChosenSubjectAndFail
+length(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)
+sum(logicChosenSubjectAndFail)/sum(logicChosenSubject) -> failRate
+failRate
+```
+
+```{r}
+sampledTranscriptData$學系 <- 
+str_replace_all(sampledTranscriptData$系級,"[1234]","")
+```
+
+```{r}
+(sampledTranscriptData$系碼!="73" & 
+   sampledTranscriptData$學系=="經濟學系") -> logiCheck
+sampledTranscriptData$學號[logiCheck] %>% unique() -> changeMajorStudent
+
+changeMajorStudent
+```
+
+```{r}
+(sampledTranscriptData$學號 == "410073409b" &
+  sampledTranscriptData$學年==101 &
+  sampledTranscriptData$學期==1) -> logiSelect
+  
+sum(sampledTranscriptData$學分數[logiSelect]*
+  sampledTranscriptData$學期成績[logiSelect])/sum(sampledTranscriptData$學分數[logiSelect]) -> studentGPA
+
+studentGPA
+```
+
+
+
+
+
+
+
+
